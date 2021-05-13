@@ -49,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
 
   user.addHook('beforeCreate', (pendingUser) => {
     let hash = bcrypt.hashSync(pendingUser.password, 12);
+    pendingUser.password = hash;
   })
 
   user.prototype.validPassword = function(typedPassword) {
