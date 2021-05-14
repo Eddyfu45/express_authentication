@@ -11,6 +11,13 @@ router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success', 'See you next time...');
+  res.redirect('/');
+});
+
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
@@ -19,7 +26,7 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.post('/signup', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { email, name, password } = req.body;
 
   try {
     const [user, created] = await db.user.findOrCreate({

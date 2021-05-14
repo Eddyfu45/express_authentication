@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const db = require('../models');
 
-const Strategy = new LocalStrategy({
+const STRATEGY = new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, async (email, password, cb) => {
@@ -17,9 +17,9 @@ const Strategy = new LocalStrategy({
         } else {
             cb(null, user);
         }
-    } catch (error) {
+    } catch (err) {
         console.log('----Error -----');
-        console.log(error);
+        console.log(err);
     }
 });
 
@@ -34,9 +34,9 @@ passport.deserializeUser(async (id, cb) => {
         if (user) {
             cb(null, user);
         }
-    } catch (error) {
+    } catch (err) {
         console.log('-----Yo, there is an error below ------');
-        console.log(error);
+        console.log(err);
     }
 })
 
